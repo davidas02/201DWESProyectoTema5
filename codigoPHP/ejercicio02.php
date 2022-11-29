@@ -3,9 +3,11 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
         header('WWW-Authenticate: Basic realm="Dominio De APA"');
         header('HTTP/1.0 401 Unauthorized');
         echo '<h1>Login Cancelado</h2>';
-        exit;
-?>
-<!DOCTYPE html>
+        exit;   
+    }
+    else {
+    ?>
+        <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -21,8 +23,8 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
             <h2>2. Desarrollo de un control de acceso con identificación del usuario basado en la función header() y en el uso de una tabla “Usuario” de la base de datos. (PDO).</h2>
         </div>
     </header>
-    <?php
-    require_once '../conf/confDBPDO.php';
+        <?php
+        require_once '../conf/confDBPDO.php';
     $user = null;
     $pas = null;
     $entradaOK = false;
@@ -35,9 +37,6 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
     $sql3 = <<< sql
             select * from T01_Usuario where T01_CodUsuario='$_SERVER[PHP_AUTH_USER]';
             sql;
-
-    
-    } else {
         try {
             $miDB = new PDO(DSN, USER, PASS);
             $statement1 = $miDB->prepare($sql1);
@@ -70,7 +69,6 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
         }
     }
     ?>
-
     <footer> 
         <a href="../../doc/CVDavidAparicioSir.pdf" target="blank"><img src="../doc/img/cv.png" alt="CV David Aparicio"/></a>
         <a href="../indexProyectoTema5.php"><img src="../doc/img/home.png" alt="HOME"/></a>
