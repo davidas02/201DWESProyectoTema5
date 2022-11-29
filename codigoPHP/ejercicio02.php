@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SERVER['PHP_AUTH_USER'])) {
+        header('WWW-Authenticate: Basic realm="Dominio De APA"');
+        header('HTTP/1.0 401 Unauthorized');
+        echo '<h1>Login Cancelado</h2>';
+        exit;
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,11 +36,7 @@
             select * from T01_Usuario where T01_CodUsuario='$_SERVER[PHP_AUTH_USER]';
             sql;
 
-    if (!isset($_SERVER['PHP_AUTH_USER'])) {
-        header('WWW-Authenticate: Basic realm="Dominio De APA"');
-        header('HTTP/1.0 401 Unauthorized');
-        echo 'Texto a enviar si el usuario pulsa el botón Cancelar';
-        exit;
+    
     } else {
         try {
             $miDB = new PDO(DSN, USER, PASS);
