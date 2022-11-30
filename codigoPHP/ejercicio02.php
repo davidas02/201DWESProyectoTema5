@@ -27,7 +27,6 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
         require_once '../conf/confDBPDO.php';
     $user = null;
     $pas = null;
-    $entradaOK = false;
     $sql1 = <<< sql
              select T01_CodUsuario,T01_Password from T01_Usuario where T01_CodUsuario='$_SERVER[PHP_AUTH_USER]';
             sql;
@@ -52,14 +51,12 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
                 if (is_object($oUsuario)) {
                     echo "Usuario: $_SERVER[PHP_AUTH_USER] <br/>";
                     echo "Contraseña: $_SERVER[PHP_AUTH_PW]<br/>";
-                    if(isset($oUsuario->T01_FechaHoraUltimaConexion)){
+                    if($oUsuario->T01_NumConexiones>1){
                     echo "Fecha de la ultima conexion: $oUsuario->T01_FechaHoraUltimaConexion <br/>";
+                    }
                     $statement2 = $miDB->prepare($sql2);
                     $statement2->execute();
                     echo "Has entrado a la aplicacion $oUsuario->T01_NumConexiones veces <br/>";
-                    }else{
-                        echo "Es tu primera vez";
-                    }
                 }
             }
         } catch (PDOException $exc) {
