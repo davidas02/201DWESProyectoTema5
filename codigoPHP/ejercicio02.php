@@ -1,4 +1,6 @@
 <?php
+$entradaOK=true;
+
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
         header('WWW-Authenticate: Basic realm="Dominio De APA"');
         header('HTTP/1.0 401 Unauthorized');
@@ -24,7 +26,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
         </div>
     </header>
         <?php
-        require_once '../conf/confDBPDO.php';
+        require_once '../conf/confDBPDODesarrollo.php';
     $user = null;
     $pas = null;
     $sql1 = <<< sql
@@ -32,9 +34,6 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
             sql;
     $sql2 = <<< sql
             update T01_Usuario set T01_NumConexiones=T01_NumConexiones+1,T01_FechaHoraUltimaConexion=now() where T01_CodUsuario='$_SERVER[PHP_AUTH_USER]';
-            sql;
-    $sql3 = <<< sql
-            select * from T01_Usuario where T01_CodUsuario='$_SERVER[PHP_AUTH_USER]';
             sql;
         try {
             $miDB = new PDO(DSN, USER, PASS);
@@ -53,11 +52,15 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
                     echo "Contraseña: $_SERVER[PHP_AUTH_PW]<br/>";
                     if($oUsuario->T01_NumConexiones>1){
                     echo "Fecha de la ultima conexion: $oUsuario->T01_FechaHoraUltimaConexion <br/>";
+                    echo "Has entrado a la aplicacion $oUsuario->T01_NumConexiones veces <br/>";
+                    }else{
+                       echo "Es la primera vez que te conectas";
                     }
                     $statement2 = $miDB->prepare($sql2);
                     $statement2->execute();
-                    echo "Has entrado a la aplicacion $oUsuario->T01_NumConexiones veces <br/>";
                 }
+            }else{
+                $entradaOK=false;
             }
         } catch (PDOException $exc) {
             echo $exc->getMessage();
