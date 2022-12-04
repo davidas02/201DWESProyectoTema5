@@ -8,7 +8,6 @@
  */
 
 //ENTORNO DESARROLLO CASA
-
 // IP del servidor y Nombre de la base de datos
 define("DSN", "mysql:dbname=DAW201DBProyectoTema5;host=192.168.3.208");
 // Usuario con el que se conecta 

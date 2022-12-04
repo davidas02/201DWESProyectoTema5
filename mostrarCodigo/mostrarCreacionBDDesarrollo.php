@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -13,11 +13,9 @@
                 <h2>Creacion de la base de datos </h2>
             </div>
         </header>
-        <div id="ejercicios">
         <?php
         highlight_file("../scriptDB/CreaDAW201DBProyectoTema5.sql");
         ?>
-        </div>
         <footer> 
             <a href="../../doc/CVDavidAparicioSir.pdf" target="blank"><img src="../doc/img/cv.png" alt="CV David Aparicio"/></a>
             <a href="../indexProyectoTema5.php"><img src="../doc/img/home.png" alt="HOME"/></a>
