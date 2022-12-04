@@ -26,7 +26,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
         </div>
     </header>
         <?php
-        require_once '../conf/confDBPDODesarrollo.php';
+        require_once '../conf/confDBPDOExplotacion.php';
     $user = null;
     $pas = null;
     $sql1 = <<< sql
