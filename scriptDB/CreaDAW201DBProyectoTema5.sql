@@ -5,7 +5,7 @@ T01_CodUsuario varchar(8) primary key,
 T01_Password varchar(255)NOT NULL,
 T01_DescUsuario varchar(255),
 T01_FechaHoraUltimaConexion datetime,
-T01_NumConexiones int default 1,
+T01_NumConexiones int default 0,
 T01_Perfil enum('usuario','administrador') default 'usuario',
 T01_ImagenUsuario MEDIUMBLOB NULL
 )engine=innoDB;
