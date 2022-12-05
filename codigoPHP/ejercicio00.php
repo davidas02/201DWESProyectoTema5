@@ -46,13 +46,26 @@
             echo "</br>";
             
         //Muestra del contenido de la variable $_COOKIE con foreach()
-            echo '<h2>Mostrar $_COOKIE con foreach()</h2>';
-            echo '<table><tr><th>Clave</th><th>Valor</th></th>';
-            foreach ($_COOKIE as $key => $value) {
-                echo "<td><strong>" . $key . "</strong></td>";
-                echo "<td>" . $value . "</td>";
-            }
-            echo '</table>';
+             echo '<h2>Mostrar $_SESSION con foreach()</h2>';
+            
+                echo "<table><tr><th class='cajaizquierda'>Clave</th><th class='cajaderecha'>Valor</th></tr>";
+                foreach ($_SESSION as $clave => $valor) {
+                    echo "<tr>";
+                    echo "<td><strong>$clave</strong></td>";
+                    if (is_object($valor)) {
+                        echo '<td><table><th>Clave</th><th>valor</th>';
+                        foreach ($valor as $c => $v) {
+                            echo "<tr><th>$c</th>";
+                            echo "<td>$v</td></tr>";
+                        }
+                        echo"</table></td>";
+                    } else {
+                        echo "<td>" . $valor . "</td>";
+                    }
+                    echo "</tr>";
+                }
+                echo "</table>";
+            
             echo "</br>";
             
             
@@ -143,7 +156,7 @@
         <footer> 
             <a href="../../doc/CVDavidAparicioSir.pdf" target="blank"><img src="../doc/img/cv.png" alt="CV David Aparicio"/></a>
             <a href="../indexProyectoTema5.php"><img src="../doc/img/home.png" alt="HOME"/></a>
-            <a href="https://www.github.com/davidas02" target="_blank"><img src="../doc/img/git.png" alt="github David Aparicio"/></a>
+            <a href="https://github.com/davidas02/201DWESProyectoTema5" target="_blank"><img src="../doc/img/git.png" alt="github David Aparicio"/></a>
             <p>2022-2023 David Aparicio Sir &COPY; Todos los derechos reservados</p>
         </footer>
     </body>
