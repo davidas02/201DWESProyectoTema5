@@ -146,20 +146,7 @@
                             <a href="mostrarCodigo/mostrarEjercicio02.php"><img src="doc/img/php.png" alt="muestra"/></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            3. Desarrollo de una aplicación (Proyecto LoginLogoffTema5) con control de acceso e identificación del usuario 
-                            basado en un formulario (Login.php) con un botón de “Entrar” y en el uso de una tabla “Usuario” de la base de datos (PDO). 
-                            En el caso de que tecleemos un usuario y password correctos se abrirá otra página (Programa.php) donde tendremos un botón de “Salir” 
-                            que nos devolverá al Login.php (Funionalidad Logoff que nos redirige automáticamente a la página de autenticación).
-                        </td>
-                        <td>
-                            <a><img src="doc/img/play.png" alt="play"/></a>
-                        </td>
-                        <td>
-                            <a><img src="doc/img/php.png" alt="muestra"/></a>
-                        </td>
-                    </tr>
+                    
                 </table>
         <footer> 
             <a href="../../">Home</a>
