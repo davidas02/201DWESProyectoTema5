@@ -19,7 +19,7 @@
     try {
         //Establecimiento de la conexión 
         $miDB = new PDO(DSN, USER, PASS);
-        /*$insercion = $miDB->prepare(<<<SQL
+        $insercion = $miDB->prepare(<<<SQL
         insert into T02_Departamento values
         ("INF","Departamento de Informatica",null,3500,FROM_UNIXTIME('1668167592')),
         ("VEN","Departamento de Ventas",null,25000,FROM_UNIXTIME('1668167592')),
@@ -31,10 +31,11 @@
         
         if ($insercion) {
             echo "<h3>Insercion ejecutada con exito</<h3>";
-            $resultadoDepartamentos = $miDB->query("select * from T02_Departamento");
+            $resultadoDepartamentos = $miDB->prepare("select * from T02_Departamento");
            print '<table>';
             print '<tr><th>codDepartamento</th><th>descDepartamento</th><th>fechaBaja</th><th>volumenNegocio</th><th>fechaAlta</th></tr>';
-            $oDepartamento=$resultadoDepartamentos->fetch_object();
+            $resultadoDepartamentos->execute();
+            $oDepartamento=$resultadoDepartamentos->fetchObject();
             while ($oDepartamento!=null) {
                 print"<tr>";
                 echo "<td>$oDepartamento->T02_codDepartamento</td>";
@@ -46,7 +47,7 @@
                 $oDepartamento=$resultadoDepartamentos->fetch_object();
             }
             print '</table>';
-        }*/
+        }
         $insercion2=$miDB->prepare(<<<SQL
         insert into T01_Usuario (T01_CodUsuario,T01_Password,T01_DescUsuario,T01_FechaHoraUltimaConexion,T01_NumConexiones,T01_Perfil) values
         ("admin",sha2(concat("admin","paso"),256),"Administrador",now(),1,"administrador"),
@@ -64,10 +65,11 @@
         $insercion2->execute();
         if($insercion2){
             echo"<h3>Insercion 2 ejecutada con exito</h3>";
-            $resultadoUsuarios = $miDB->query("select * from T02_Departamento");
+            $resultadoUsuarios = $miDB->prepare("select * from T02_Departamento");
            print '<table>';
             print '<tr><th>codDepartamento</th><th>descDepartamento</th><th>fechaBaja</th><th>volumenNegocio</th><th>fechaAlta</th></tr>';
-            $oUsuario=$resultadoUsuarios->fetch_object();
+            $resultadoUsuarios->execute();
+            $oUsuario=$resultadoUsuarios->fetchObject();
             while ($oUsuario!=null) {
                 print"<tr>";
                 echo "<td>$oUsuario->T01_CodUsuario</td>";
