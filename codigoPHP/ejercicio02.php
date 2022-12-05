@@ -26,11 +26,9 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
         </div>
     </header>
         <?php
-        require_once '../conf/confDBPDOExplotacion.php';
-    $user = null;
-    $pas = null;
+        require_once '../conf/confDBPDODesarrollo.php';
     $sql1 = <<< sql
-             select T01_CodUsuario,T01_Password from T01_Usuario where T01_CodUsuario='$_SERVER[PHP_AUTH_USER]';
+             select * from T01_Usuario where T01_CodUsuario='$_SERVER[PHP_AUTH_USER]';
             sql;
     $sql2 = <<< sql
             update T01_Usuario set T01_NumConexiones=T01_NumConexiones+1,T01_FechaHoraUltimaConexion=now() where T01_CodUsuario='$_SERVER[PHP_AUTH_USER]';
@@ -41,14 +39,10 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
             $statement1->execute();
             $oUsuario = $statement1->fetchObject();
             if (is_object($oUsuario) && $oUsuario->T01_Password = hash('sha256', ($_SERVER['PHP_AUTH_USER'] . $_SERVER['PHP_AUTH_PW']))) {
-                $user = $_SERVER['PHP_AUTH_USER'];
-                $pas = $_SERVER['PHP_AUTH_PW'];
-                
-                $statement3 = $miDB->prepare($sql3);
-                $statement3->execute();
-                $oUsuario = $statement3->fetchObject();
+                $statement2 = $miDB->prepare($sql2);
+                $statement2->execute();
                 if (is_object($oUsuario)) {
-                    echo "Usuario: $_SERVER[PHP_AUTH_USER] <br/>";
+                    echo "Bienvenido $_SERVER[PHP_AUTH_USER] <br/>";
                     echo "Contraseña: $_SERVER[PHP_AUTH_PW]<br/>";
                     if($oUsuario->T01_NumConexiones>1){
                     echo "Fecha de la ultima conexion: $oUsuario->T01_FechaHoraUltimaConexion <br/>";
@@ -72,7 +66,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
     <footer> 
         <a href="../../doc/CVDavidAparicioSir.pdf" target="blank"><img src="../doc/img/cv.png" alt="CV David Aparicio"/></a>
         <a href="../indexProyectoTema5.php"><img src="../doc/img/home.png" alt="HOME"/></a>
-        <a href="https://www.github.com/davidas02" target="_blank"><img src="../doc/img/git.png" alt="github David Aparicio"/></a>
+        <a href="https://github.com/davidas02/201DWESProyectoTema5" target="_blank"><img src="../doc/img/git.png" alt="github David Aparicio"/></a>
         <p>2022-2023 David Aparicio Sir &COPY; Todos los derechos reservados</p>
     </footer>
 </body>
